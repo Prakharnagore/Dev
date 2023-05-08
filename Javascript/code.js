@@ -1,16 +1,17 @@
-Array.prototype.myReduce = function (cb, initialValue) {
-  let accumulator = initialValue;
-  for (let i = 0; i < this.length; i++) {
-    accumulator = accumulator ? cb(accumulator, this[i], i, this) : this[i];
+Function.prototype.myApply = function (context = {}, ...args) {
+  if (typeof this !== "function") {
+    throw new Error(this + " is not a function");
   }
-  return accumulator;
+
+  context.fn = this;
+  return () => context.fn(...args);
 };
 
-const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].myReduce(
-  (accumulator, current, index, array) => {
-    return accumulator + current;
-  },
-  0
-);
+var obj = { name: "hello world" };
 
+function sayHelloWorld(age) {
+  return this.name + " " + age;
+}
+
+const data = sayHelloWorld.bind(obj, 100);
 console.log(data);
