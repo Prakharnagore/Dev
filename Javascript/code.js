@@ -1,17 +1,22 @@
-Function.prototype.myApply = function (context = {}, ...args) {
-  if (typeof this !== "function") {
-    throw new Error(this + " is not a function");
-  }
+Promise.allPolyFill = (promises) => {
+  return new Promise((resolve, reject) => {
+    const results = [];
 
-  context.fn = this;
-  return () => context.fn(...args);
+    if (!promises.length) {
+      resolve(results);
+      return;
+    }
+    
+    let pending = promises.length;
+
+    promises.forEach((promise, idx) => {
+      Promise.resolve(promise).then((res) => {
+        results[idx] = res;
+        pending--;
+        if (pending == 0) {
+          resolve(results);
+        }
+      }, reject);
+    });
+  });
 };
-
-var obj = { name: "hello world" };
-
-function sayHelloWorld(age) {
-  return this.name + " " + age;
-}
-
-const data = sayHelloWorld.bind(obj, 100);
-console.log(data);

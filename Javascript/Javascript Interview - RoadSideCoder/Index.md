@@ -644,4 +644,197 @@ function sayHelloWorld(age) {
 const data = sayHelloWorld.bind(obj);
 console.log(data(100));
 ```
- 
+
+### Question 18. callback(), callback hell, promises, promise chaining, promise combinators, async await.
+
+```
+Promise Combinators : 
+
+1. Promise.all([]) 
+If one fails, all others also fail.
+
+2. Promise.race([])
+Return promise which is fullfilled or rejected first.
+
+3. Promise.allSettled([])
+If one fails, it returns all other.
+
+4. Promise.any([]);
+It only return the first fullfilled promise and ignore all the rejected once.
+```
+
+```
+Solve Promise Recursively :
+
+funtion importantAction(){}
+funtion likeTheVideo(){}
+funtion shareTheVideo(){}
+
+function promRecurse(funcPromises){
+  if(funcPromises.length ===0) return;
+
+  const currPromise = funcPromises.shift();
+
+  currPromise
+  .then((res)=>console.log(res))
+  .catch((err)=>console.log(err));
+
+  promRecurse(funcPromises);
+  
+}
+
+promRecurse([
+  importantAction("Roadside Coder");
+  likeTheVideo("Javascript Interview Questions");
+  shareTheVideo("Javascript Interview Questions");
+])
+```
+
+```
+Promise Polyfill :
+
+function PromisePolyFill(executor) {
+  let onResolve,
+    onReject,
+    isFulFilled = false,
+    isRejected = false,
+    isCalled = false,
+    value;
+
+  function resolve(val) {
+    isFulFilled = true;
+    value = val;
+
+    if (typeof onResolve === "function") {
+      onResolve(val);
+      isCalled = true;
+    }
+  }
+
+  function reject(val) {
+    isRejected = true;
+    value = val;
+    if (typeof onReject === "function") {
+      onReject(val);
+      isCalled = true;
+    }
+  }
+
+  this.then = function (callback) {
+    onResolve = callback;
+    if (isFulFilled && !isCalled) {
+      isCalled = true;
+      onResolve(value);
+    }
+    return this;
+  };
+
+  this.catch = function (callback) {
+    onReject = callback;
+    if (isRejected && !isCalled) {
+      isCalled = true;
+      onReject(value);
+    }
+    return this;
+  };
+
+  try {
+    executor(resolve, reject);
+  } catch (error) {
+    reject(error);
+  }
+}
+
+const examplePromise = new PromisePolyFill((resolve, reject) => {
+  // setTimeout(()=>{
+  resolve(2);
+  // },1000);
+});
+
+console.log(examplePromise);
+
+examplePromise
+  .then((res) => {
+    console.log("res", res);
+  })
+  .catch((err) => console.error(err));
+
+PromisePolyFill.resolve=(val)=>{
+    return new PromisePolyFill(function executor(resolve,reject){
+      resolve(val);
+    })
+  }
+
+PromisePolyFill.reject=(val)=>{
+    return new PromisePolyFill(function executor(resolve,reject){
+      reject(val);
+    })
+  }
+```
+
+```
+Promise.all([]) polyfill : 
+
+Promise.allPolyFill = (promises) => {
+  return new Promise((resolve, reject) => {
+    const results = [];
+
+    if (!promises.length) {
+      resolve(results);
+      return;
+    }
+    
+    let pending = promises.length;
+
+    promises.forEach((promise, idx) => {
+      Promise.resolve(promise).then((res) => {
+        results[idx] = res;
+        pending--;
+        if (pending == 0) {
+          resolve(results);
+        }
+      }, reject);
+    });
+  });
+};
+
+```
+
+### Question 19. Debouncing and Throttling
+
+```
+Debounce : It limits the execution of function call and wait for certain amount time before running it again.
+
+Throttling : It limits the execution of event handler function when the event is triggered continuously due to user actions.
+```
+
+```
+Debounce polyfill :
+
+const myDebounce = (cb,d)=>{
+  let timer;
+  return function(...args) {
+    if(timer){
+      clearTimeout(timer);
+    }
+    timer = setTimeout(()=>{
+      cb(...args);
+      timer=null;
+    },d);
+  }
+}
+```
+
+```
+Throttle polyfill : 
+
+const myThrottle = (cb,d)=>{
+  let last = 0;
+  return function (...args){
+    let now = new Date().getTime();
+    if(now - last < d) return;
+    last = now;
+    return cb(...args);
+  }
+}
+```
