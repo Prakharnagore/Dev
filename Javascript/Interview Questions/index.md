@@ -17,7 +17,7 @@ console.log(value); // {}
 
 ```
 let value = {name:"abc"}
-console.log(delete value); // false
+console.log(delete value); // false 
 ```
 
 ```
