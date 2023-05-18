@@ -32,7 +32,9 @@ abc();
 ### Question 2. Temporal Dead Zone (TDZ)?
 
 ```
-A let or const variable is said to be in a "temporal dead zone" (TDZ) from the start of the block until code execution reaches the line where the variable is declared and initialized. let and const are hoisted in temporal dead zone
+A let or const variable is said to be in a "temporal dead zone" (TDZ) from the start of the block until code execution reaches the line where the variable is declared and initialized. let and const are hoisted in temporal dead zone.
+or
+A temporal dead zone (TDZ) is the block where a variable is inaccessible until the moment the computer initializes it with a value
 ```
 
 ### Question 3. map, filter and reduce Polyfills
@@ -108,7 +110,7 @@ forEach()
 2. modifies the original array.
 ```
 
-### Question 4. funtion statements & function expressions ?
+### Question 4. funtion statements/declaration & function expressions ?
 
 ```
 fn statements : function abc(){}
@@ -184,7 +186,7 @@ Module.publicMethod();
 Module.privateMethod();
 ```
 
-### Question 9. Loadash once() function polyfill?
+### Question 9. Loadash once() function polyfill? ❎
 
 ```
 function once(func, context) {
@@ -206,7 +208,7 @@ hello(1,2);
 hello(1,2);
 ```
 
-### Question 10. Implementation of caching/memoize function
+### Question 10. Implementation of caching/memoize function? ❎ 
 
 ```
 function myMemoize(fn, context) {
@@ -216,7 +218,6 @@ function myMemoize(fn, context) {
     if (!res[argsCache]) {
       res[argsCache] = fn.call(context || this, ...args);
     }
-
     return res[argsCache];
   };
 }
@@ -239,7 +240,7 @@ console.timeEnd("Second Call");
 ### Question 11. Closure vs Scope
 
 ```
-Closure : Rhen ever we create a function between another function, the inner function is the closure.
+Closure : when ever we create a function between another function, the inner function is the closure.
 Global Scope
 Outer Scope
 Local Scope
@@ -249,7 +250,7 @@ Global Scope
 Local Scope
 ```
 
-### Question 12. Currying
+### Question 12. Currying 
 
 ```
 Function that take one argument at a time and return a function expecting the next argument.
@@ -295,7 +296,7 @@ function sum(a){
   }
 }
 
-const x =sum(10);
+const x = sum(10);
 console.log(x(5)(6));
 ```
 
@@ -354,7 +355,7 @@ function abcd(a,b,...args,d){
 abcd(1,2,3,4); // error - the rest parameter must be in the last
 ```
 
-### Question 15. Shallow copy vs deep copy
+### Question 15. Shallow copy vs deep copy ❎
 
 ```
 
