@@ -107,9 +107,29 @@ import { Outlet } from "react-router-dom"
 10. Navlink
 
 ```
-<NavLink to="path"
-   className={({active})=>active ? "" :""} >
+<NavLink to="path" className={({active})=>active ? "" :""} >
+...
 </NavLink>
+
 <NavLink to="path" style={({active})=>active ? "" :""} >
+...
 </NavLink>
 ```
+
+11. End Matching Route
+
+```
+<NavLink to="path" end={true} className={({active})=>active ? "" :""} >
+...
+</NavLink>
+```
+
+12. Relative Path (for routing back back)
+
+Examplse: vans/:id -> vans
+
+```
+<Link to=".." relative="path">Back</Link>
+```
+
+13.
