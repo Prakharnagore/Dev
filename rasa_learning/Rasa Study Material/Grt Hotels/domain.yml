@@ -1,0 +1,225 @@
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - name_of_customer
+  - general
+  - existing
+  - confirm
+  - confirmvalue
+  - submits
+  - feedback
+  - explore
+  - web_information
+  - from_date
+  - to_date
+  - rooms
+  - email_of_customer
+  - Delux
+  - Basic
+  - Elite
+  - no
+  - ask_phone
+  - carousel
+  - Y
+  - N
+  - type
+  - feedback_given
+  - get_email_details
+  - New_booking
+  - phone_number
+entities:
+  - names
+  - fromdate
+  - todate
+  - room
+  - email_customer
+  - feedback
+  - confirm
+  - phone
+
+actions:
+  - action_greet_user
+  - action_name
+  - action_quiz
+  - action_cool
+  - action_send_email
+  - action_send_mail
+  - action_submits
+  - action_se_all_information
+  - action_all_information
+  - action_submit_value
+  - action_con_all
+  - action_confirmation_value
+  - action_carousel
+  - action_greet_user
+
+slots:
+  names:
+    type: unfeaturized
+  fromdate:
+    type: unfeaturized
+  todate:
+    type: unfeaturized
+  room:
+    type: unfeaturized
+  email_customer:
+    type: unfeaturized
+  feedback:
+    type: unfeaturized
+  confirm:
+    type: unfeaturized
+  phone:
+    type: unfeaturized
+
+responses:
+  utter_grtbot:
+  - text: "Hey! I am Neha and here to help you. \n
+           Can I Have your contact Details? \n "
+  utter_Names:
+  - text: Please enter your name.
+
+  utter_message_question:
+  - text:  "Hey {names}\n
+            How can I help you today?"
+    buttons:
+      - title: New Booking
+        payload: /New_booking
+      - title: Existing Booking
+        payload: /existing
+      - title: General Questions
+        payload: /general
+
+  utter_existing:
+  - text: Sure.Please help me with your booking details. Please share one of the below.
+    buttons:
+      - title: Confirmation Number
+        payload: /confirm
+      - title: Phone Number
+        payload: /ask_phone
+
+  utter_confirm_value:
+  - text: Please enter your Confirmation Number.
+
+  utter_confirm:
+  - text: Thanks!, I could see you are staying for few nights with us.
+
+  utter_stay:
+  - text: Let's make your stay memorable. Please let me know can I help?
+    buttons:
+      - title: Submit details
+        payload: /submits
+      - title: Feedback
+        payload: /feedback
+      - title: Web check in
+        payload: /web_information
+      - title: Email me the details
+        payload: /get_email_details
+      - title : Back to search
+        payload: /email_of_customer
+
+  utter_slot_value:
+  - text: "Great.We have got some great categories of rooms.Take a look and select one that matches your interest.\n"
+
+  utter_email_of_customer:
+  - text: Write your email address
+
+  utter_happy:
+  - text: "Great, carry on!"
+
+  utter_ask_book_room:
+  - text: Are you ready to book a room
+    buttons:
+      - title: Yes
+        payload: /affirm
+      - title: No
+        payload: /no
+
+  utter_thoughts:
+  - text: What are your thoughts on this hotel.
+
+  utter_goodbye:
+  - text: "Bye"
+
+  utter_feed_backs:
+  - text: Thank you for the feedback.
+
+  utter_value_email:
+  - text: "You can check it in your email for the hotel list"
+
+  utter_type_hotel:
+  - text: "What kind of room do you want to see"
+    buttons:
+      - title: Basic
+        payload: /Basic
+      - title: Delux
+        payload: /Delux
+      - title: Elite
+        payload: /Elite
+
+  utter_phone_number:
+  - text: "What is your phone number"
+
+  utter_phone:
+  - text: "phone is there {phone}"
+
+  utter_mood:
+  - text: "Great as you feel great"
+
+  utter_greet_user:
+  - text: "Hi 👋, Welcome to Debi group of hotels! I am HoteBot! Your friendly bot agent 🤖. How can I assist you today?"
+
+  utter_to_date:
+  - text: "Please pick a date To Date (yyyy-MM-dd)"
+    custom:
+        payload: datePicker
+        data:
+          - label: skd
+            value: /todate
+
+  utter_room:
+  - text: "Please let us know the number of rooms required"
+
+  utter_from_date:
+    - text: "Sure. Please help me with some details.Do you have a date in mind? \n From Date. ((dd-MMM)(3-may)) "
+      custom:
+        payload: datePick
+        data:
+          - label: skdasda
+            value: /fromdate
+
+  utter_hotel_description_Basic:
+  - text: 'The elegantly designed 618 sq.ft Deluxe Suites offer a separate living room with a dining table and work desk.\n Catch up on your favourite TV shows, work with unlimited WiFi access or make use of the foot massage machine. \nEnjoy additional complimentary amenities, great city views, a walk-in wardrobe, 4-fixture bathrooms and soothing wood- floor interiors.'
+
+  utter_hotel_description_elite:
+  - text: 'Spread across the 4th, 5th and 6th levels of grand by GRT, our 309 sq.ft Business Class rooms are fitted with modern features perfect for the discerning traveller.\n Enjoy complimentary toiletries, WiFi, and access to the pool and gym facilities.'
+
+  utter_hotel_description_delux:
+  - text: 'View AmenitiesThe Themed Suites at Grand by GRT are the most luxurious, spacious suites in the hotel, where every design element has been carefully chosen to reflect the brandÕs classy, avant- garde philosophy. \n Each suite measures 618 sq.ft and offers a fleet of features like soothing interiors, a spacious living area separated from the bedroom by a sliding glass door, a massage chair, a lush bedroom with excellent city views, large walk-in wardrobes, and a modern 4-fixture bathroom with a separate rain shower. \n Enjoy additional amenities, discounts and offers as well.'
+
+  utter_quick_replies:
+  - text: "choose yes or no"
+    custom:
+        payload: quickReplies
+        data:
+          - title: YES
+            payload: /Y_payload
+          - title: NO
+            payload: /N_payload
+
+  utter_dynamic_link:
+  - text: ""
+    custom:
+      payload: dynamiclink
+
+  utter_no_value:
+  - text: "So you don't want to book a room "
+    custom:
+      payload: dynamiclink
+
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
